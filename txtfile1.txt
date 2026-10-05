@@ -1,0 +1,50 @@
+# RAG Architecture and LLM Limitations
+
+Modern Large Language Models (LLMs) are exceptionally powerful tools for processing natural language.
+They can generate code, write essays, summarize documents, and translate languages effectively.
+However, enterprise adoption of LLMs faces several fundamental engineering challenges.
+The primary challenge is that general LLMs only know information up to their training cutoff date.
+They lack real-time access to your company's private, internal knowledge base.
+Another key constraint is the Context Window limit of every language model.
+A context window acts as the short-term working memory of an LLM during a session.
+
+
+=============================================================================================================
+=============================================================================================================
+
+
+Although modern models support larger context windows, stuffing all documents into a prompt is impractical.
+Large contexts significantly increase API latency and token costs for every user query.
+Furthermore, LLMs suffer from the "Lost in the Middle" phenomenon when processing massive prompts.
+Crucial facts buried in the middle of long text blocks are often missed or ignored.
+Data privacy and security present another non-negotiable roadblock for enterprise application.
+Uploading confidential corporate files directly into external public APIs can violate compliance.
+Organizations need guarantees that proprietary data remains within secure boundary controls.
+Additionally, LLMs are known to produce "hallucinations" when forced to answer unknown topics.
+An LLM will confidently state false facts rather than admitting it lacks the required data.
+To solve these issues, developers rely on Retrieval-Augmented Generation (RAG).
+RAG combines the reasoning capability of LLMs with specialized external search systems.
+Instead of fine-tuning or retraining the entire model, RAG fetches precise contextual evidence.
+Fine-tuning a model is expensive, time-consuming, and hard to update frequently with new data.
+
+
+=============================================================================================================
+=============================================================================================================
+
+
+RAG allows real-time updates: simply add or remove documents from your storage repository.
+By isolating retrieval from generation, RAG provides deterministic control over domain knowledge.
+Building a RAG pipeline from scratch without frameworks like Langchain builds deep internal clarity.
+Understanding how raw text turns into vectors and gets retrieved is crucial for production systems.
+RAG architecture consists of three main stages: Ingestion, Retrieval, and Generation.
+Ingestion transforms raw unstructured documents into searchable semantic database records.
+Retrieval finds the top relevant pieces of text based on the user's explicit query.
+Generation feeds the query along with retrieved context to the LLM for an accurate final answer.
+This grounded response pattern drastically reduces hallucination rates in real-world deployments.
+Enterprise RAG applications form the backbone of modern AI customer support and document analysis.
+Practicing with custom text datasets helps developers optimize chunking, overlap, and top-k parameters.
+By understanding raw matrix computations and vector searches, you master backend AI engineering.
+
+
+=============================================================================================================
+=============================================================================================================

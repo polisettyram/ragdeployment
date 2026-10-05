@@ -1,0 +1,50 @@
+# Data Ingestion, Chunking Strategies, and Vector Embeddings
+
+Data Ingestion is the foundational phase of constructing any robust RAG pipeline.
+Raw input data comes in diverse formats: PDFs, text files, Word documents, and HTML pages.
+Before storing this data in a search index, it must undergo text preprocessing and cleaning.
+Special characters, extra whitespaces, and formatting artifacts are typically stripped out.
+Once cleaned, raw documents cannot be passed whole into a vector index due to size limits.
+Large documents must be broken down into smaller semantic units called "Chunks."
+Text Chunking determines the granular resolution of your RAG retrieval engine.
+If a chunk is too large, it introduces noisy, irrelevant details into the model's context.
+
+
+=============================================================================================================
+=============================================================================================================
+
+
+If a chunk is too small, vital context surrounding key facts gets fragmented or lost completely.
+Fixed-size chunking splits text strictly by character count, token count, or word boundaries.
+To prevent cutting sentences in half, developers implement a concept known as "Chunk Overlapping."
+Overlap ensures adjacent chunks share overlapping text boundaries (e.g., 50 overlapping characters).
+Overlapping preserves semantic continuity across chunk borders during the search process.
+Recursive character splitting adjusts splits according to natural delimiters like paragraphs and periods.
+After chunking, numerical representation is required because machines cannot compute raw text meaning directly.
+Embedding models translate text chunks into dense numeric arrays called "Vector Embeddings."
+An embedding vector represents high-dimensional spatial coordinates corresponding to semantic meaning.
+Words or sentences with similar contextual meanings sit close together in vector space.
+For instance, vectors for "automobile" and "car" are located extremely close to one another.
+High-performance embedding models map text into 384, 768, or 1536 floating-point numbers.
+
+
+=============================================================================================================
+=============================================================================================================
+
+
+These computed vectors are stored in a specialized system known as a Vector Database.
+Popular vector databases include Pinecone, Chroma, Qdrant, Milvus, and FAISS.
+When a user submits a search query, the query text is transformed using the exact same embedding model.
+The system then runs a vector search to find document vectors closest to the query vector.
+Cosine Similarity measures the angular distance between two vectors regardless of magnitude.
+Euclidean Distance measures the straight-line spatial distance between points in multi-dimensional space.
+Dot Product offers extremely fast similarity calculations when vectors are strictly normalized.
+The vector database ranks all candidate chunks based on these calculated mathematical scores.
+The highest-scoring candidate chunks represent the most semantically relevant information available.
+Proper tuning of chunk size, overlap, and embedding models is essential for accurate RAG retrieval.
+Systematic benchmark evaluations ensure vector search consistently retrieves the target ground truth.
+Mastering vector math enables developers to build custom similarity search functions from scratch.
+
+
+=============================================================================================================
+=============================================================================================================
